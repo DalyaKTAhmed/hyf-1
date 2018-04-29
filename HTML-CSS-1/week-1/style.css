@@ -1,0 +1,114 @@
+html, body {
+    background:#FFEFD3;
+    font-family:'Lato', helvetica, sans-serif;
+    font-size: 16px;
+}
+p {
+	font-size: 16px;
+	line-height: 24px;
+	margin-bottom: 20px;
+	color: #444444;
+}
+section {
+	border-top: 1px solid #dedede;
+	padding: 20px 0 0;
+}
+#container {
+	width: 90%;
+	max-width: 800px;
+	background: #FFFFFF;
+	margin: 30px auto;
+}
+#imgStyle {
+	width: 12.5%;
+	float: left;
+	margin-right: 30px;   
+}
+#imgStyle img {
+	width: 100%;
+	height: auto;
+	border-radius: 40px;
+}
+#myName {
+	float: left;
+}
+#myName h1 {
+	font-size: 36px;
+	font-weight: 700;
+	font-family: 'Rokkitt', Helvetica, sans-serif;
+    color:#4C473F;
+}
+#contactInfo ul {
+	list-style-type: none;
+	font-size: 16px;
+	margin-top: 6px;
+}
+#contactInfo {
+	float: right;
+}
+#contactInfo ul li {
+	margin-bottom: 3px;
+	color: #444444;
+}
+#contactInfo ul li a {
+	color: #444444; 
+	text-decoration: none;
+}
+#contactInfo ul li a:hover { 
+	color: #ff6969;
+}
+#theMainInfo {
+	padding: 0 40px;
+}
+#extraInfo {
+	padding: 0 40px;
+}
+#extraInfo ul li a {
+	color: #444; 
+	text-decoration: none;
+}
+#extraInfo ul li a:hover { 
+	color: #ff6969;
+}
+.clear {clear: both;}
+.information {
+	padding: 25px 35px;
+	border-bottom: 2px solid #7E7E7E;
+	background: #FFFFFF;
+}
+.partHead {
+	float: left;
+	width: 25%;
+}
+
+.partContent {
+	float: right;
+	width: 72.5%;
+}
+.partHead h1 {
+	font-family: 'Rokkitt', Helvetica, sans-serif;
+	font-style: italic;
+	font-size: 25px;
+	color: #585858;
+}
+.partContent h2 {
+	font-family: 'Rokkitt', Helvetica, sans-serif;
+	font-size: 20px;
+	margin-bottom: -2px;
+}
+.subInfo {
+	font-size: 15px;
+	font-style: italic;
+	margin-bottom: 3px;
+}
+.extraInfolink {
+	margin-bottom: 20px;
+	font-size: 16px;
+	color: #444444;
+    line-height: 24px;
+}
+
+.extraInfolink ul li {
+	margin-bottom: 5px;
+}
+
