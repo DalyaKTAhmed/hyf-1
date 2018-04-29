@@ -1,0 +1,19 @@
+body {
+  display: grid;
+  grid-template-rows: 15em auto 10em;
+  min-height: 100vh;
+}
+header {
+  background-color: var(--c-light);
+  padding: 3em;
+  text-align: center;
+}
+main {
+  max-width: 30em;
+  padding: 1em;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+}
