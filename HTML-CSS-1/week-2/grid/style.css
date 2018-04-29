@@ -1,0 +1,31 @@
+html{
+    box-sizing:border-sizing;
+}
+*, *:after, *:before{
+    box-sizing: inherit;
+}
+body{
+    margin:0;
+    background-color: #e4e4e4;
+}
+h1,h2{
+    text-align:center;
+    color: gray;
+    }
+ul{
+   list-style-type: none;
+    } 
+    .grid-item { 
+       font-family:  sans-serif,Helvetica,Arial;
+       border: 2px solid #7e7e7e;
+       text-align: center;
+       color: gray;
+       margin-top: 10px;
+       margin-right: 10px;
+       }
+       h3:hover{
+        color:orange;
+    }
+    img {
+        max-width: 100%;
+         }
