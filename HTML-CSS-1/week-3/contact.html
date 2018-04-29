@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <title> Contact me! </title>
+ </head>
+ 
+ <body>
+  <div class="formContainer">
+    <form action="Thank.html" target="_blank">
+    <label for="fnamn">First name</label>
+    <input type="text" id="fnamn" name="First name" placeholder="Write First name..">
+    <label for="ename">Last name</label>
+    <input type="text" id="ename" name="Last name" placeholder="Write Last name..">
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="Subject" placeholder="Write here.." style="height:200px"></textarea>
+    <input type="submit" value="Send">
+    </form>
+  </div>
+  
+  <script>
+    $(document).ready(function(){
+    $("body").css("display", "none");
+    $("body").fadeIn(600);
+    $("submit").click(function(event){
+    event.preventDefault();
+    linkLocation = this.href;
+    $("body").fadeOut(600, redirectPage);
+    });
+    function redirectPage() {
+    window.location = linkLocation;
+    }
+    });
+   </script>
+  
+ </body>
+</html>
