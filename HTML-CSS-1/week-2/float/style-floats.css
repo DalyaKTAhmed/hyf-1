@@ -1,0 +1,41 @@
+
+     
+ .grid-item {
+    width: calc((100% / 2) - 1em);
+    float: left;
+}  
+.grid-item:first-child{
+    width: calc(100% - 1em);
+}
+.grid-item:nth-child(even){
+    clear: left;
+}
+
+@media (min-width: 480px){
+    .grid-item:nth-child(-n + 2) {
+        width: calc((100% / 2) - 1em);
+        float: left;
+        clear: none;
+    }
+    .grid-item:nth-child(n + 3){
+        width: calc((100% / 3) - 1em);
+        float: left;
+        clear: none; 
+    }  
+    .grid-item:nth-child(3n){
+       clear: left;
+   }  
+}
+@media (min-width: 1025px){
+    .grid-item:nth-child(n + 1){
+        width: calc((100% / 4) - 1em); 
+        float: left;
+        clear: none;
+    }
+    .grid-item:first-child {
+        width: calc((100% / 2) - 1em);
+    } 
+    .grid-item:nth-child(4n){
+        clear: left;
+    }
+}
