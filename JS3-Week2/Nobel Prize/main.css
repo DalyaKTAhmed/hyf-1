@@ -1,0 +1,76 @@
+html{
+    box-sizing:border-sizing;
+}
+*, *:after, *:before{
+    box-sizing: inherit;
+}
+body{
+    
+    background-color: #e4e4e4;
+    font-family:  sans-serif,Helvetica,Arial;
+}
+.header{
+    margin-top: 2em;
+    padding: 2em;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+      0px 10px 20px rgba(0,0,0,0.05),
+      0px 20px 20px rgba(0,0,0,0.05),
+      0px 30px 20px rgba(0,0,0,0.05);
+      background-color:#9975b9; 
+      color:white;
+ }
+ .body{
+    display:flex;
+    
+}
+.category-info{
+    margin-top:1.7em;
+    width:40%;
+   height: 10em;
+    border-bottom: 2px solid #9975b9;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+      0px 10px 20px rgba(0,0,0,0.05),
+      0px 20px 20px rgba(0,0,0,0.05),
+      0px 30px 20px rgba(0,0,0,0.05);
+      padding:1em;
+      line-height: 2em;
+      margin-right: 10em;
+      
+}
+.winners{
+   width:60%;
+   margin-top:1.7em;
+   border-bottom: 2px solid #9975b9;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+      0px 10px 20px rgba(0,0,0,0.05),
+      0px 20px 20px rgba(0,0,0,0.05),
+      0px 30px 20px rgba(0,0,0,0.05);
+      padding:2em;  
+}
+
+ul{
+    margin-top:1em;
+ }
+
+ li{
+    list-style-type:none;
+    margin-bottom: 1em; 
+ }
+
+ .winners-list{
+    list-style-type:none;
+    margin-bottom: 1em;  
+ }
+ span{
+    
+    margin-left: 0.3em;
+    width: 3em;
+    text-align: center; 
+ }
+ select{
+    height:2em;
+}
+ 
+ 
+ 
+ 
