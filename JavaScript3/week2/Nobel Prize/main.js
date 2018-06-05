@@ -1,8 +1,14 @@
 let nobelPrizeWinnersHttps = "http://api.nobelprize.org/v1/prize.json?year=2017";
 let prizeWinners = [];
+let timerId = null;
+
+
 function main() {
     fetchWinners();
+    hideDiv();
+    openModal();
 }
+
 /**
  * Remove all child nodes to specified parent node.
  * 
@@ -19,6 +25,7 @@ function removeChildNodes(parentNode) {
 * 
 */
 function fetchWinners() {
+
     fetchDataFromServer(nobelPrizeWinnersHttps).then(data => {
         prizeWinners = data.prizes;
         showNobelPrizeCategoriesInSelect(prizeWinners);
@@ -43,6 +50,7 @@ function fetchDataFromServer(nobelPrizeUrl) {
     });
     return serverResponse;
 }
+
 /**
  * Shows (renders to the DOM) all nobel prize categories in a select element.
  * 
@@ -52,17 +60,17 @@ function showNobelPrizeCategoriesInSelect(prizeWinners) {
     const categoriesSelectElement = document.querySelector("#categories");
 
     categoriesSelectElement.setAttribute(
-        "onchange", " getWinners(this.value);showCategory(this.value)"
+        "onchange", " getWinners(this.value);showCategory(this.value);showDiv()"
     );
 
     prizeWinners.forEach(prize => {
         const optionElement = document.createElement("option");
         optionElement.setAttribute("value", prize.category);
         optionElement.innerText = prize.category;
-
         categoriesSelectElement.appendChild(optionElement);
     });
 }
+
 /**
 * Shows (renders to the DOM) information about a category
 * 
@@ -82,6 +90,7 @@ function showCategory(categoryName) {
       </ul>
     `;
 }
+
 /**
  * Gets all winners for a category.
  * 
@@ -94,28 +103,66 @@ function getWinners(categoryName) {
     let winners = selectedCategory.laureates;
     console.log(winners);
     showWinners(winners);
-    
-  }
-  
-  /**
-   * Shows (renders to the DOM) a list of winners.
-   * 
-   * @param {Array} winnersArray Information about winners 
-   */
-  function showWinners(winnersArray) {
+
+}
+
+/**
+ * Shows (renders to the DOM) a list of winners.
+ * 
+ * @param {Array} winnersArray Information about winners 
+ */
+function showWinners(winnersArray) {
     const contributorsListElement = document.querySelector(".winners-list");
     removeChildNodes(contributorsListElement);
-  
+
     winnersArray.forEach(winner => {
-      const listItemElement = document.createElement("li");
-      listItemElement.innerHTML = `
+        const listItemElement = document.createElement("li");
+        listItemElement.innerHTML = `
       <ul>
           <li><span><strong>Winner Name: </strong>${winner.firstname}</span><span>${winner.surname}</span></li>
           <li><span><strong>Motivation: </strong>${winner.motivation}</span></li>
           <li><span><strong>Share: </strong>${winner.share}</span></li>
         </ul>
       `;
-  
-      contributorsListElement.appendChild(listItemElement);
+
+        contributorsListElement.appendChild(listItemElement);
     });
-  }
+}
+
+/**
+* Show divisions when category is selected
+*/
+function showDiv() {
+    closeModal();
+    let categoryDiv = document.querySelector(".category-info");
+    categoryDiv.style.display = 'block';
+    let winnersDiv = document.querySelector(".winners");
+    winnersDiv.style.display = 'block';
+
+}
+
+/**
+ * Hide divisions when the page is loaded
+ */
+function hideDiv() {
+    let categoryDiv = document.querySelector(".category-info");
+    categoryDiv.style.display = 'none';
+    let winnersDiv = document.querySelector(".winners");
+    winnersDiv.style.display = 'none';
+
+}
+
+/**
+ * Open a pop-up window which contains a loader after 1s 
+ */
+function openModal() {
+    timerId = window.setTimeout(() => { document.getElementById('modal').style.display = 'block'; }, 1000);
+}
+
+/**
+ * Close the pop-up window that contains the loadeer
+ */
+function closeModal() {
+    window.clearTimeout(timerId);
+    document.getElementById('modal').style.display = 'none';
+}
