@@ -77,6 +77,7 @@ function showNobelPrizeCategoriesInSelect(prizeWinners) {
 * @param {String} categoryName Unique category identifier.
 */
 function showCategory(categoryName) {
+    closeModal();
     const selectedCategory = prizeWinners.filter(category => {
         return category.category === categoryName;
     })[0];
@@ -133,7 +134,6 @@ function showWinners(winnersArray) {
 * Show divisions when category is selected
 */
 function showDiv() {
-    closeModal();
     let categoryDiv = document.querySelector(".category-info");
     categoryDiv.style.display = 'block';
     let winnersDiv = document.querySelector(".winners");
