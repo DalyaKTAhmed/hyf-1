@@ -1,8 +1,9 @@
-let HyfReposHttps = "https://api.github.com/orgs/HackYourFuture/repos?per_page=100";
+let HyfReposHttps = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 let repositories = [];
+let contributors = [];
 function main() {
+fetchRepositories();
 
-    fetchRepositories(repositories);
 }
 
 /**
@@ -21,13 +22,10 @@ function removeChildNodes(parentNode) {
 * 
 * @param {String} data Data from server in JSON format.
 */
-function fetchRepositories(data) {
-    //repositories = JSON.parse();
-    // console.log(
-    //     `Received and parsed ${repositories.length} repositories from server.`
-    // );
-    fetchDataFromServer(HyfReposHttps).then(repositories => {
+function fetchRepositories() {
+    fetchDataFromServer(HyfReposHttps).then(data => {
         repositories = data;
+        console.log(repositories);
         showRepositoriesInSelect(repositories);
     }).catch(function (err) {
         console.log('ERROR presenting data from server', err);
@@ -38,7 +36,7 @@ function fetchRepositories(data) {
 /**
  * Fetch  
  * 
- * @param {string} houseId- the house number 
+ * @param {string} repositoriesUrl
  */
 function fetchDataFromServer(repositoriesUrl) {
     let serverResponse = fetch(repositoriesUrl).then((response) => {
@@ -59,37 +57,71 @@ function fetchDataFromServer(repositoriesUrl) {
  */
 function showRepositoriesInSelect(repositories) {
     const repositoriesSelectElement = document.querySelector("#repositories");
-  
+
     repositoriesSelectElement.setAttribute(
-      "onchange"," showRepository(this.value)"
+        "onchange", " showRepository(this.value),fetchContributors(this.value)"
     );
-  
+
     repositories.forEach(repository => {
-      const optionElement = document.createElement("option");
-      optionElement.setAttribute("value", repository.id);
-      optionElement.innerText = repository.name;
-  
-      repositoriesSelectElement.appendChild(optionElement);
+        const optionElement = document.createElement("option");
+        optionElement.setAttribute("value", repository.id);
+        optionElement.innerText = repository.name;
+
+        repositoriesSelectElement.appendChild(optionElement);
     });
-  }
-  /**
- * Shows (renders to the DOM) information about a repository.
- * 
- * @param {String} repositoryId Unique repository identifier.
- */
+}
+/**
+* Shows (renders to the DOM) information about a repository.
+* 
+* @param {String} repositoryId Unique repository identifier.
+*/
 function showRepository(repositoryId) {
-    const selectedRepository = repositories.filter(repository => {
-      return repository.id === Number.parseInt(repositoryId);
-    })[0];
-  
+    const selectedRepository = repositories.find(repository => {
+        return repository.id === Number.parseInt(repositoryId);
+    });
     const repositoryInfoElement = document.querySelector('.repository-info');
     removeChildNodes(repositoryInfoElement);
     repositoryInfoElement.innerHTML = `
-      <ul>
-        <li class="repository-info-item"><strong>Repository:</strong><span>${selectedRepository.name}</span></li>
-        <li class="repository-info-item"><strong>Description:</strong><span>${selectedRepository.description}</span></li>
-        <li class="repository-info-item"><strong>Forks:</strong><span>${selectedRepository.forks}</span></li>
-        <li class="repository-info-item"><strong>Updated:</strong><span>${selectedRepository.updated_at}</span></li>
-      </ul>
-    `;
+    <strong>Repository :</strong><p>${selectedRepository.name}</p> <br>
+    <strong>Description :</strong><p>${selectedRepository.description}</p> <br>
+    <strong>Forks :</strong><p>${selectedRepository.forks}</p> <br>
+    <strong>Updated :</strong><p>${selectedRepository.updated_at}</p>`;
+}
+/**
+ * Gets all contributors for a repository.
+ * 
+ * @param {String} repositoryId Unique repository identifier.
+ */
+function fetchContributors(repositoryId) {
+    const selectedRepository = repositories.find(repository => {
+        return repository.id === Number.parseInt(repositoryId);
+    });
+   
+  
+   fetchDataFromServer(selectedRepository.contributors_url).then(data => {
+      showContributors(data);
+    });
+  }
+
+
+/**
+ * Shows (renders to the DOM) a list of contributors.
+ * 
+ * @param {String} contributorsData Data about contributors in JSON format.
+ */
+function showContributors(contributorsData) {
+    const contributors = contributorsData;
+    const contributorsListElement = document.querySelector(".contributors-list");
+    removeChildNodes(contributorsListElement);
+  
+    contributors.forEach(contributor => {
+      const listItemElement = document.createElement("li");
+      listItemElement.innerHTML = `
+          <img width="100px" src="${contributor.avatar_url}">
+          <p class="contributor-login">${contributor.login}</p>
+          <span class="contributor-contributions">${contributor.contributions}</span>
+      `;
+  
+      contributorsListElement.appendChild(listItemElement);
+    });
   }
