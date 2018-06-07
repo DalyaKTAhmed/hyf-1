@@ -1,4 +1,4 @@
-let nobelPrizeWinnersHttps = "http://api.nobelprize.org/v1/prize.json?year=2017";
+const nobelPrizeWinnersHttps = "http://api.nobelprize.org/v1/prize.json?year=2017";
 let prizeWinners = [];
 let timerId = null;
 
@@ -78,9 +78,9 @@ function showNobelPrizeCategoriesInSelect(prizeWinners) {
 */
 function showCategory(categoryName) {
     closeModal();
-    const selectedCategory = prizeWinners.filter(category => {
+    const selectedCategory = prizeWinners.find(category => {
         return category.category === categoryName;
-    })[0];
+    });
 
     const categoryInfoElement = document.querySelector('.category-info');
     removeChildNodes(categoryInfoElement);
@@ -98,9 +98,9 @@ function showCategory(categoryName) {
  * @param {String} categoryName .
  */
 function getWinners(categoryName) {
-    const selectedCategory = prizeWinners.filter(category => {
+    const selectedCategory = prizeWinners.find(category => {
         return category.category === categoryName;
-    })[0];
+    });
     let winners = selectedCategory.laureates;
     console.log(winners);
     showWinners(winners);
