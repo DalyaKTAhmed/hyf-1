@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 /* global Util */
 
@@ -16,9 +16,9 @@ class Contributor {
     // Replace this comment with your code
     contributorList.innerHTML = `
     <li>
-    <img width="100px" src="${contributor.avatar_url}">
-    <p class="contributor-login">${contributor.login}</p>
-    <span class="contributor-contributions">${contributor.contributions}</span>
+    <img width="100px" src="${this.data.avatar_url}">
+    <p class="contributor-login">${this.data.login}</p>
+    <span class="contributor-contributions">${this.data.contributions}</span>
     </li>
 `;
   }

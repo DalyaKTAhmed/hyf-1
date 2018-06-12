@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 /* global Util, Repository, Contributor */
 
@@ -25,23 +25,47 @@ class App {
 
             console.log(repos);
 
+            this.showRepositoriesInSelect(repos);
+
             this.repos = repos.map(repo => new Repository(repo));
+
+            
             // ...
         } catch (error) {
             this.renderError(error);
         }
     }
 
+  
     /**
+     * Shows (renders to the DOM) all repositories in a select element.
+     * 
+     * @param {Array} repositories 
+     */
+
+    showRepositoriesInSelect(repositories) {
+        repositories.forEach(repository => {
+            const optionElement = document.createElement("option");
+            optionElement.setAttribute("value", repository.id);
+            optionElement.innerText = repository.name;
+
+            repositoriesSelectElement.appendChild(optionElement);
+        });
+
+        const repositoriesSelectElement = document.querySelector("#repositories");
+
+        repositoriesSelectElement.setAttribute(
+            "onchange", "fetchContributorsAndRender(this.value)"
+        );
+    }
+    
+  /**
      * Fetch contributor information for the selected repository and render the
      * repo and its contributors as HTML elements in the DOM.
      * @param {number} repoId The array index of the repository.
      */
     async fetchContributorsAndRender(repoId) {
         try {
-
-            this.showRepositoriesInSelect(this.repos);
-
             const repo = this.repos.find(repository => {
                 return repository.id === Number.parseInt(repoId);
             });
@@ -60,8 +84,6 @@ class App {
 
             const contributorList = Util.createAndAppend('ul', rightDiv);
 
-
-
             repo.render(leftDiv);
 
             contributors
@@ -71,29 +93,6 @@ class App {
             this.renderError(error);
         }
     }
-
-    /**
-     * Shows (renders to the DOM) all repositories in a select element.
-     * 
-     * @param {Array} repositories 
-     */
-
-    showRepositoriesInSelect(repositories) {
-        const repositoriesSelectElement = document.querySelector("#repositories");
-
-        repositoriesSelectElement.setAttribute(
-            "onchange", "this.fetchContributorsAndRender(this.value)"
-        );
-
-        repositories.forEach(repository => {
-            const optionElement = document.createElement("option");
-            optionElement.setAttribute("value", repository.id);
-            optionElement.innerText = repository.name;
-
-            repositoriesSelectElement.appendChild(optionElement);
-        });
-    }
-
 
     /**
      * Render an error to the DOM.

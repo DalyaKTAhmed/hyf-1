@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 /* global Util */
 
@@ -16,13 +16,13 @@ class Repository {
     //
     // Replace this comment with your code
     //
+   
 
     parent.innerHTML = `
-    <strong>Repository :</strong><p>${selectedRepository.name}</p> <br>
-    <strong>Description :</strong><p>${selectedRepository.description}</p> <br>
-    <strong>Forks :</strong><p>${selectedRepository.forks}</p> <br>
-    <strong>Updated :</strong><p>${selectedRepository.updated_at}</p>`;
-    
+    <strong>Repository :</strong><p>${this.data.name}</p> <br>
+    <strong>Description :</strong><p>${this.data.description}</p> <br>
+    <strong>Forks :</strong><p>${this.data.forks}</p> <br>
+    <strong>Updated :</strong><p>${this.data.updated_at}</p>`;  
   }
 
   /**
