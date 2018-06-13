@@ -43,7 +43,12 @@ class App {
      * @param {Array} repositories 
      */
 
-    showRepositoriesInSelect(repositories) {
+    static showRepositoriesInSelect(repositories) {
+        const repositoriesSelectElement = document.querySelector("#repositories");
+
+        repositoriesSelectElement.setAttribute(
+            "onchange", "App.fetchContributorsAndRender(this.value)"
+        );
         repositories.forEach(repository => {
             const optionElement = document.createElement("option");
             optionElement.setAttribute("value", repository.id);
@@ -52,20 +57,16 @@ class App {
             repositoriesSelectElement.appendChild(optionElement);
         });
 
-        const repositoriesSelectElement = document.querySelector("#repositories");
-
-        repositoriesSelectElement.setAttribute(
-            "onchange", "fetchContributorsAndRender(this.value)"
-        );
+      
     }
-    
+
   /**
      * Fetch contributor information for the selected repository and render the
      * repo and its contributors as HTML elements in the DOM.
      * @param {number} repoId The array index of the repository.
      */
-    async fetchContributorsAndRender(repoId) {
-        try {
+   static fetchContributorsAndRender(repoId) {
+        
             const repo = this.repos.find(repository => {
                 return repository.id === Number.parseInt(repoId);
             });
@@ -73,7 +74,7 @@ class App {
 
             //const repo = this.repos[index];
 
-            const contributors = await repo.fetchContributors();
+            const contributors =  repo.fetchContributors();
 
             const container = document.getElementById('container');
             // Erase previously generated inner HTML from the container div
@@ -89,9 +90,7 @@ class App {
             contributors
                 .map(contributor => new Contributor(contributor))
                 .forEach(contributor => contributor.render(contributorList));
-        } catch (error) {
-            this.renderError(error);
-        }
+       
     }
 
     /**
