@@ -13,7 +13,7 @@ class Contributor {
    * @param {HTMLElement} contributorList The parent element in which to render the contributor.
   */
   render(contributorList) {
-    // Replace this comment with your code
+    
     contributorList.innerHTML = `
     <li>
     <img width="100px" src="${this.data.avatar_url}">
