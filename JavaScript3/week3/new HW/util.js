@@ -15,33 +15,37 @@ class Util {
     });
     return elem;
   }
-//   fetchJSON(url) {
-//     // Add your code here
-//     const serverResponse = fetch(url).then((response) => {
-//       if (!response.ok) {
-//         console.log('Looks like there was a problem. Status Code: ' + response.status);
-//         return;
-//       }
-//       return response.json();
-//     }).catch(err => {
-//       console.log('ERROR fetching from server', err);
-//     });
-//     return serverResponse;
-//   }
+
+
   static fetchJSON(url) {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        if (xhr.status < 400) {
-          resolve(xhr.response);
-        } else {
-          reject(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
-        }
-      };
-      xhr.onerror = () => reject(new Error('Network request failed'));
-      xhr.send();
+    // Add your code here
+    const serverResponse = fetch(url).then((response) => {
+      if (!response.ok) {
+        console.log('Looks like there was a problem. Status Code: ' + response.status);
+        return;
+      }
+      return response.json();
+    }).catch(err => {
+      console.log('ERROR fetching from server', err);
     });
+    return serverResponse;
   }
+
+  
+  // static fetchJSON(url) {
+  //   return new Promise((resolve, reject) => {
+  //     const xhr = new XMLHttpRequest();
+  //     xhr.open('GET', url);
+  //     xhr.responseType = 'json';
+  //     xhr.onload = () => {
+  //       if (xhr.status < 400) {
+  //         resolve(xhr.response);
+  //       } else {
+  //         reject(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
+  //       }
+  //     };
+  //     xhr.onerror = () => reject(new Error('Network request failed'));
+  //     xhr.send();
+  //   });
+  // }
 }
