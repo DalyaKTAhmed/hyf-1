@@ -13,10 +13,6 @@ class Repository {
    * @param {HTMLElement} parent The parent element in which to render the repository.
    */
   render(parent) {
-    //
-    // Replace this comment with your code
-    //
-   
 
     parent.innerHTML = `
     <strong>Repository :</strong><p>${this.data.name}</p> <br>
