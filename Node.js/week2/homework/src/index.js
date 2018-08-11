@@ -15,9 +15,9 @@ let update = require("./update");
 
 let command = process.argv[2];
 
-let listItem = process.argv[3];
+let argument3 = process.argv[3];
 
-let listItem2 = process.argv[4];
+let argument4 = process.argv[4];
 
 
 let listItemsArray = [];
@@ -50,13 +50,13 @@ switch (command) {
 
     case "add":
 
-        add(listItem, listItemsObject);
+        add(argument3, listItemsObject);
 
         break;
 
     case "remove":
 
-        remove(listItem);
+        remove(argument3);
 
         break;
 
@@ -68,7 +68,7 @@ switch (command) {
 
     case "update":
 
-        update(listItem, listItem2);
+        update(argument3, argument4);
 
         break;
 
@@ -77,7 +77,7 @@ switch (command) {
         fs.readFile("./help.txt", "utf8", (err, data) => {
 
             if (err) throw err;
-            
+
             console.log(data);
         })
 

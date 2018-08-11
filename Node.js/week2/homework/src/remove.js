@@ -3,14 +3,14 @@
 let fs = require("fs");
 
 
-let remove = function (listItem) {
+let remove = function (argument3) {
 
     fs.open("./toDoList.json", 'r', (err, fd) => {
 
         if (err) {
             //check if the file exist 
             if (err.code === 'ENOENT') {
-                
+
                 console.error('file does not exist');
                 return;
             }
@@ -31,9 +31,9 @@ let remove = function (listItem) {
                     console.log("The list is empty");
                 }
 
-                else if (listItem in listItemsObject.listItemsArray) {
+                else if (argument3 in listItemsObject.listItemsArray) {
 
-                    listItemsObject.listItemsArray.splice(listItem, 1);
+                    listItemsObject.listItemsArray.splice(argument3, 1);
 
                     let listItemsJson = JSON.stringify(listItemsObject);
 
@@ -43,11 +43,11 @@ let remove = function (listItem) {
 
                     })
 
-                    console.log(`Item ${listItem} is successfully removed`)
+                    console.log(`Item ${argument3} is successfully removed`)
 
                 } else {
 
-                    console.log(`Item ${listItem} is not exist `)
+                    console.log(`Item ${argument3} is not exist `)
                 }
 
             })

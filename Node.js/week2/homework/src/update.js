@@ -4,7 +4,7 @@ let fs = require("fs");
 
 
 
-let update = function (listItem, listItem2) {
+let update = function (argument3, argument4) {
 
     fs.open("./toDoList.json", 'r', (err, fd) => {
 
@@ -21,7 +21,7 @@ let update = function (listItem, listItem2) {
         else {
 
             fs.readFile("./toDoList.json", "utf8", (err, data) => {
-                
+
                 if (err) throw err;
 
                 listItemsObject = JSON.parse(data);
@@ -31,9 +31,9 @@ let update = function (listItem, listItem2) {
                     console.log("The list is empty");
                 }
 
-                else if (listItem in listItemsObject.listItemsArray) {
+                else if (argument3 in listItemsObject.listItemsArray) {
 
-                    listItemsObject.listItemsArray.splice(listItem, 1, listItem2);
+                    listItemsObject.listItemsArray.splice(argument3, 1, argument4);
 
                     let listItemsJson = JSON.stringify(listItemsObject);
 
@@ -43,11 +43,11 @@ let update = function (listItem, listItem2) {
 
                     })
 
-                    console.log(`Item ${listItem} is successfully updated`)
+                    console.log(`Item ${argument3} is successfully updated`)
 
                 } else {
 
-                    console.log(`Item ${listItem} is not exist `)
+                    console.log(`Item ${argument3} is not exist `)
                 }
 
             })

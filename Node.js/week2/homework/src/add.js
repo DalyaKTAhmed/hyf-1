@@ -9,7 +9,7 @@ let listItemsObject = {
     listItemsArray: []
 };
 
-let add = function (listItem) {
+let add = function (argument3) {
 
     fs.open("./toDoList.json", "a", (err) => {
 
@@ -27,7 +27,7 @@ let add = function (listItem) {
 
         }
 
-        listItemsObject.listItemsArray.push(listItem);
+        listItemsObject.listItemsArray.push(argument3);
 
         let listItemsJson = JSON.stringify(listItemsObject);
 
@@ -38,7 +38,7 @@ let add = function (listItem) {
 
         })
         
-        console.log(`Item ${listItem} was added successfully`)
+        console.log(`Item ${argument3} was added successfully`)
 
 
     })
