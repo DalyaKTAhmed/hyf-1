@@ -19,7 +19,6 @@ function createServer(port) {
         currentState = JSON.stringify({
           "state": state
         });
-        response.end(currentState);
         break;
 
       case "/add":
@@ -27,7 +26,7 @@ function createServer(port) {
         currentState = JSON.stringify({
           "state": state
         });
-        response.end(currentState);
+        
         break;
 
       case "/subtract":
@@ -35,7 +34,6 @@ function createServer(port) {
         currentState = JSON.stringify({
           "state": state
         });
-        response.end(currentState);
         break;
 
       case "/reset":
@@ -43,7 +41,6 @@ function createServer(port) {
         currentState = JSON.stringify({
           "state": state
         });
-        response.end(currentState);
         break;
 
       default:
@@ -51,8 +48,9 @@ function createServer(port) {
         currentState = JSON.stringify({
           error: 'Not found'
         });
-        response.end(currentState);
     }
+
+    response.end(currentState);
   });
 
   return server;
