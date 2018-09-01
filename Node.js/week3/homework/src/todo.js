@@ -2,6 +2,8 @@
 
 const fs   = require('fs');
 const uuid = require('uuid/v4');
+const util = require('util');
+const readFile = util.promisify(fs.readFile);
 
 const DEFAULT_ENCODING = 'utf8';
 
@@ -26,17 +28,51 @@ class Todo {
 
     return todo;
   }
-
-  read() {
-    return new Promise(resolve => {
-      fs.readFile(this._filename, DEFAULT_ENCODING, (error, data) => {
-        if (error)
-          return resolve([]);
-
-        return resolve(JSON.parse(data));
-      });
-    });
+  async read() {
+    return await readFile(this._filename).then(data => {
+      return JSON.parse(data);
+    }).catch(error => {
+      console.log("File is empty");
+      return [];
+    })
   }
+  
+  // read() {
+  //   return new Promise(resolve => {
+  //     fs.readFile(this._filename, DEFAULT_ENCODING, (error, data) => {
+  //       if (error)
+  //         return resolve([]);
+
+  //       return resolve(JSON.parse(data));
+  //     });
+  //   });
+  // }
+
+ 
+  async findTodo(id){
+    const todos = await this.read();
+    // let todos
+    // this.read().then(data => todos= data);
+    const todo = todos.find(t => t.id === id);
+    if (todo == null) {
+      const error = new Error(`To-do with ID ${id} does not exist`);
+      error.code = 'not-found';
+      throw error;
+    }
+    return todo;
+  }
+
+  // async getTodo(id) {
+  //   const todos = await this.read();
+
+  //   const todo = todos.find(todo => todo.id === id);
+  //   if (todo == null) {
+  //     const error = new Error(`To-do with ID ${id} does not exist`);
+  //     error.code = 'not-found';
+  //     throw error;
+  //   }
+  //   return todo;
+  // }
 
   async update(id, description) {
     const todos = await this.read();
