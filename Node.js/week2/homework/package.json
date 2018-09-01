@@ -15,6 +15,7 @@
     "eslint-plugin-standard": "^3.0.1"
   },
   "dependencies": {
-    "commander": "^2.17.1"
+    "commander": "^2.17.1",
+    "inspector": "^0.5.0"
   }
 }

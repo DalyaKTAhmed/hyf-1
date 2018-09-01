@@ -38,18 +38,6 @@ class Todo {
     });
   }
 
-  async getTodo(id) {
-    const todos = await this.read();
-
-    const todo = todos.find(todo => todo.id === id);
-    if (todo == null) {
-      const error = new Error(`To-do with ID ${id} does not exist`);
-      error.code = 'not-found';
-      throw error;
-    }
-    return todo;
-  }
-
   async update(id, description) {
     const todos = await this.read();
 

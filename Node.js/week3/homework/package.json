@@ -12,6 +12,11 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "mon": "0.0.8",
+    "uuid": "^3.3.2"
   }
 }
