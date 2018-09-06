@@ -1,14 +1,33 @@
+DROP database IF EXISTS todo;
+CREATE database todo;
+USE todo;
 
-
-CREATE TABLE Users (
-    ID INT,
-    FirstName CHAR(255),
-    LastName CHAR(255)
+CREATE TABLE users(
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(1000) NOT NULL,
+    last_name VARCHAR(1000) NOT NULL,
+    PRIMARY KEY (id)
 );
-CREATE TABLE ToDo_List (
-    ID INT,
-    UserID INT,
-    ToDoItem TEXT,
-    Tag CHAR(255),
-    MarkAsDone BOOLEAN 
+
+CREATE TABLE todo_items(
+    id INT NOT NULL AUTO_INCREMENT,
+    text TEXT NOT NULL,
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE,
+    user_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE tags (
+    id INT NOT NULL AUTO_INCREMENT,
+    description varchar(255) DEFAULT '',
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE todo_item_tag(
+    todo_item_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    PRIMARY KEY (todo_item_id, tag_id),
+    FOREIGN KEY (tag_id) REFERENCES tags(id),
+    FOREIGN KEY (todo_item_id) REFERENCES todo_items(id)
 );
