@@ -9,9 +9,9 @@ class TodoModel {
     }
 
     // Loads all the TODOs in the database
-    load(callback) {
-        const selectTodoItems = "SELECT * FROM todo_items";
-        this.dbConnection.query(selectTodoItems, function (err, results, fields) {
+    load(userID,callback) {
+        const selectTodoItems = "SELECT users.first_name, todo_items.text FROM todo_items, users WHERE  users.id  = ?";
+        this.dbConnection.query(selectTodoItems,userID, function (err, results, fields) {
             if (err) {
                 callback(err);
                 return;
@@ -118,7 +118,7 @@ dbConnection.connect(function (err) {
 
     const todoModel = new TodoModel(dbConnection);
     
-    todoModel.load(function (err, todoItems) {
+    todoModel.load(3,function (err, todoItems) {
         if (err) {
             console.log("error loading TODO items:", err);
         }
@@ -170,7 +170,7 @@ dbConnection.connect(function (err) {
         console.log("Message from MySQL Server : " + result.message);
     });
 
-    todoModel.untagTodoItem([51,1], function (err, result) {
+    todoModel.untagTodoItem([43,1], function (err, result) {
         if (err) {
             console.log("error removing a tag from TODO item", err);
         }
@@ -180,7 +180,7 @@ dbConnection.connect(function (err) {
         console.log("Number of records affected with warning : " + result.warningCount);
         console.log("Message from MySQL Server : " + result.message);
     });
-    todoModel.markCompleted(46, function (err, result) {
+    todoModel.markCompleted(53, function (err, result) {
         if (err) {
             console.log("error marking a todo as completed", err);
         }
