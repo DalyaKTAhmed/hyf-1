@@ -1,6 +1,6 @@
 'use strict';
 
-const fs   = require('fs');
+const fs = require('fs');
 const uuid = require('uuid/v4');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
@@ -16,7 +16,7 @@ class Todo {
     const todos = await this.read();
 
     const todo = {
-      id:   uuid(),
+      id: uuid(),
       done: false,
 
       description
@@ -28,7 +28,9 @@ class Todo {
 
     return todo;
   }
+
   async read() {
+
     return await readFile(this._filename).then(data => {
       return JSON.parse(data);
     }).catch(error => {
@@ -36,66 +38,62 @@ class Todo {
       return [];
     })
   }
-  
-  // read() {
-  //   return new Promise(resolve => {
-  //     fs.readFile(this._filename, DEFAULT_ENCODING, (error, data) => {
-  //       if (error)
-  //         return resolve([]);
 
-  //       return resolve(JSON.parse(data));
-  //     });
-  //   });
-  // }
 
- 
-  async findTodo(id){
+  async findTodo(id) {
+
     const todos = await this.read();
-    // let todos
-    // this.read().then(data => todos= data);
     const todo = todos.find(t => t.id === id);
+
     if (todo == null) {
       const error = new Error(`To-do with ID ${id} does not exist`);
       error.code = 'not-found';
       throw error;
     }
+
     return todo;
   }
 
-  // async getTodo(id) {
-  //   const todos = await this.read();
-
-  //   const todo = todos.find(todo => todo.id === id);
-  //   if (todo == null) {
-  //     const error = new Error(`To-do with ID ${id} does not exist`);
-  //     error.code = 'not-found';
-  //     throw error;
-  //   }
-  //   return todo;
-  // }
 
   async update(id, description) {
-    const todos = await this.read();
 
-    const todo = todos.find(t => t.id === id);
-    if (todo == null) {
-      const error = new Error(`To-do with ID ${id} does not exist`);
-      error.code = 'not-found';
-      throw error;
-    }
-
+    const todo = await this.findTodo(id);
     todo.description = description;
 
     await this._save(todos);
-
     return todo;
   }
 
-  async delete_(id) {
-    const todos         = await this.read();
-    const filteredTodos = todos.filter(t => t.id !== id);
+  async makeDone(id) {
 
+    const todo = await this.findTodo(id);
+    todo.done = true;
+
+    await this._save(todos);
+    return todo;
+  }
+
+
+
+  async makeNotDone(id) {
+
+    const todo = await this.findTodo(id);
+    todo.done = false;
+
+    await this._save(todos);
+    return todo;
+  }
+
+
+  async delete_(id) {
+    const todos = await this.read();
+    const filteredTodos = todos.filter(t => t.id !== id);
     return this._save(filteredTodos);
+  }
+
+  async delete() {
+    const todos = [];
+    return this._save(todos);
   }
 
   // Methods starting with underscore should not be used outside of this class

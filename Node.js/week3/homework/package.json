@@ -16,6 +16,7 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
+    "inspect": "0.0.2",
     "mon": "0.0.8",
     "uuid": "^3.3.2"
   }
