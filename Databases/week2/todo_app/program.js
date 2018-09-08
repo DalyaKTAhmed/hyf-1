@@ -16,6 +16,7 @@ class TodoModel {
                 callback(err);
                 return;
             }
+            console.log(fields)
 
             callback(null, results);
         });
@@ -29,7 +30,7 @@ class TodoModel {
                 callback(err);
                 return;
             }
-
+            
             callback(null, results);
         });
     }
@@ -118,7 +119,7 @@ dbConnection.connect(function (err) {
 
     const todoModel = new TodoModel(dbConnection);
     
-    todoModel.load(3,function (err, todoItems) {
+    todoModel.load(3,function (err, todoItems,fields) {
         if (err) {
             console.log("error loading TODO items:", err);
         }
@@ -127,7 +128,7 @@ dbConnection.connect(function (err) {
     });
 
 
-    todoModel.create({ text: 'Do the home work', user_id: 3 }, function (err, result) {
+ todoModel.create({ text: 'Do the home work', user_id: 3 }, function (err, result,fields) {
         if (err) {
             console.log("error creating a TODO item:", err);
         }
@@ -136,28 +137,30 @@ dbConnection.connect(function (err) {
         console.log("Number of rows affected : " + result.affectedRows);
         console.log("Number of records affected with warning : " + result.warningCount);
         console.log("Message from MySQL Server : " + result.message);
+        let newTodoId = result.insertId;
+        console.log(newTodoId);
     });
 
-    todoModel.update(["Walk the dog",3],function (err, result) {
-        if (err) {
-            console.log("error updating TODO item", err);
-        }
+//     todoModel.update(["Walk the dog",3],function (err, result) {
+//         if (err) {
+//             console.log("error updating TODO item", err);
+//         }
 
-        console.log("todo item has been updated ");
-        console.log("Number of rows affected : " + result.affectedRows);
-        console.log("Number of records affected with warning : " + result.warningCount);
-        console.log("Message from MySQL Server : " + result.message);
-    });
-    todoModel.delete(2,function (err, result) {
-        if (err) {
-            console.log("error deleting TODO item", err);
-        }
+//         console.log("todo item has been updated ");
+//         console.log("Number of rows affected : " + result.affectedRows);
+//         console.log("Number of records affected with warning : " + result.warningCount);
+//         console.log("Message from MySQL Server : " + result.message);
+//     });
+//     todoModel.delete(2,function (err, result) {
+//         if (err) {
+//             console.log("error deleting TODO item", err);
+//         }
 
-        console.log("todo item has been deleted ");
-        console.log("Number of rows affected : " + result.affectedRows);
-        console.log("Number of records affected with warning : " + result.warningCount);
-        console.log("Message from MySQL Server : " + result.message);
-    });
+//         console.log("todo item has been deleted ");
+//         console.log("Number of rows affected : " + result.affectedRows);
+//         console.log("Number of records affected with warning : " + result.warningCount);
+//         console.log("Message from MySQL Server : " + result.message);
+//     });
 
     todoModel.tagTodoItem({ todo_item_id:43, tag_id: 1}, function (err, result) {
         if (err) {
@@ -170,26 +173,26 @@ dbConnection.connect(function (err) {
         console.log("Message from MySQL Server : " + result.message);
     });
 
-    todoModel.untagTodoItem([43,1], function (err, result) {
-        if (err) {
-            console.log("error removing a tag from TODO item", err);
-        }
-        // if there is no error, you have the result
-        console.log("a tag on todo item has been removed ");
-        console.log("Number of rows affected : " + result.affectedRows);
-        console.log("Number of records affected with warning : " + result.warningCount);
-        console.log("Message from MySQL Server : " + result.message);
-    });
-    todoModel.markCompleted(53, function (err, result) {
-        if (err) {
-            console.log("error marking a todo as completed", err);
-        }
-        // if there is no error, you have the result
-        console.log("a todo item has been marked ");
-        console.log("Number of rows affected : " + result.affectedRows);
-        console.log("Number of records affected with warning : " + result.warningCount);
-        console.log("Message from MySQL Server : " + result.message);
-    });
+//     todoModel.untagTodoItem([43,1], function (err, result) {
+//         if (err) {
+//             console.log("error removing a tag from TODO item", err);
+//         }
+//         // if there is no error, you have the result
+//         console.log("a tag on todo item has been removed ");
+//         console.log("Number of rows affected : " + result.affectedRows);
+//         console.log("Number of records affected with warning : " + result.warningCount);
+//         console.log("Message from MySQL Server : " + result.message);
+//     });
+    // todoModel.markCompleted(53, function (err, result) {
+    //     if (err) {
+    //         console.log("error marking a todo as completed", err);
+    //     }
+    //     // if there is no error, you have the result
+    //     console.log("a todo item has been marked ");
+    //     console.log("Number of rows affected : " + result.affectedRows);
+    //     console.log("Number of records affected with warning : " + result.warningCount);
+    //     console.log("Message from MySQL Server : " + result.message);
+    // });
 
     
 });
