@@ -1,0 +1,50 @@
+One multi-user app, sharing backend.
+[$xxx] is value substitution
+
+Authenthication gives users.id
+
+list all tasks for a user
+App gives users.id
+	select todo_items.text, tags.description, todo_items.is_completed 
+	from todo_items 
+	left join todo_item_tag on todo_items.id = todo_item_tag.todo_item_id 
+	left join tags on tags.id = todo_item_tag.tag_id
+	where todo_items.user_id = [$users.id]
+returns todo_items.text, tags.description, todo_items.is_completed
+
+create task
+App gives user.id, todo_items.text
+	insert into todo_items (text, user_id) values ([$text], [$user_id])
+returns result (ok/not ok) and todo_items.id (if successful)
+
+update task
+App gives todo_items.id, updated fields and new values as a string
+-> user.id, todo_items.id, modified values 
+	update todo_items set [$values_string] where todo_items.id = [$todo_items.id]
+returns result (ok/not ok) 
+
+delete task
+App gives user.id, todo_items.id
+	delete from todo_items where todo_items.id = [$todo_items.id] 
+	and todo_items.user_id = [$users.id]
+returns result (ok/not ok) 
+
+tagTodoItem
+App gives todo_items.id, tags.id
+	insert into todo_item_tag 
+	(todo_item_id, tag_id) values ([$todo_item.id],[$tag.id])
+returns result (ok/not ok) 
+
+untagTodoItem
+App gives todo_items.id, tags.id
+	delete from todo_item_tag where
+	todo_item_id = [$todo_item.id] and tag_id = [$tag.id]
+returns result (ok/not ok) 
+
+markCompleted
+App gives todo_items.id, todo_items.isCompleted
+	update todo_items set isCompleted = [$todo_items.isCompleted]
+	where id is [$todo_items.id]
+returns result (ok/not ok) 
+
+
