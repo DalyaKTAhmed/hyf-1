@@ -11,7 +11,7 @@ class TodoModel {
     // Loads all the TODOs in the database
     load(userID,callback) {
         //App gives users.id! 
-        const selectTodoItems = " SELECT todo_items.text, tags.description, todo_items.is_completed FROM todo_items LEFT JOIN todo_item_tag ON todo_items.id = todo_item_tag.todo_item_id LEFT JOIN tags ON tags.id = todo_item_tag.tag_id WHERE todo_items.user_id = [$users.id]";
+        const selectTodoItems = " SELECT todo_items.text, tags.description, todo_items.is_completed FROM todo_items LEFT JOIN todo_item_tag ON todo_items.id = todo_item_tag.todo_item_id LEFT JOIN tags ON tags.id = todo_item_tag.tag_id WHERE todo_items.user_id = ?";
         this.dbConnection.query(selectTodoItems,userID, function (err, results, fields) {
             if (err) {
                 callback(err);
