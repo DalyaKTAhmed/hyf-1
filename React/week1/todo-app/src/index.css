@@ -1,0 +1,16 @@
+body{
+    padding: 8em;
+    background-color: gainsboro;
+    font: 15em;
+    line-height: 2em;
+}
+
+
+#container{
+    display:flex;
+    justify-content: flex;
+}
+li{
+    list-style-type: circle;
+
+}
