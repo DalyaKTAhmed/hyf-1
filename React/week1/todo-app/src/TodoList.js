@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 class TodoList extends Component {
 
     constructor(props) {
-        super();
+        super(props);
             this.tasks = [
                 {
                 description: "Get out of bed,", date:"Wed Sep 13 2017"
@@ -14,6 +14,7 @@ class TodoList extends Component {
     };
 
     render() {
+     
 
         return (
             <div className="main">

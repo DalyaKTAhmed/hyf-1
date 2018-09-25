@@ -5,7 +5,8 @@ import TodoList from "./TodoList"
 // import  App from "./App.js";
 
 let destination = document.querySelector("#container");
-const tasks = [
+
+const newTasks = [
     {
         description:"Brush teeth,", date:"Thu Sep 14 2017"
         },
@@ -17,7 +18,7 @@ const tasks = [
 ReactDOM.render(
     <div>
         <p> Todo list</p>
-        <TodoList tasks={tasks}/>
+        <TodoList tasks={newTasks}/>
         {/* <App/> */}
 
     </div>, destination
