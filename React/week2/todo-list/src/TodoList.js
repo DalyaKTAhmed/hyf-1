@@ -1,33 +1,24 @@
 import React, { Component } from "react";
+import CheckBox from "./CheckBox";
 import "./index.css";
 
 
 class TodoList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            todoChecked: true
-        };
         this.props = props;
-        this.handleCheck = this.handleCheck.bind(this);
-    }
-
-    handleCheck() {
-        this.setState({
-            checked: !this.state.todoChecked
-        });
     };
-
 
     render() {
         let tasks = this.props.tasks;
+        let handleCheck = this.props.handleCheck;
         return (
             <form>
                 {tasks.map((task) =>
                     <div className="todo-task">
-                        <input type="checkbox" onChange={this.handleCheck} />
+                        <input type="checkbox" onChange={handleCheck} />
                         <label className="strike-through" key={task.id}>
-                            <span>{task.description}</span> 
+                            <span>{task.description}</span>
                             <span>{task.deadline}</span>
                         </label>
                     </div>
@@ -36,5 +27,7 @@ class TodoList extends Component {
         )
     }
 };
+
+
 
 export default TodoList;
