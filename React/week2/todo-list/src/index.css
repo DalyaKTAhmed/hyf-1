@@ -5,24 +5,23 @@ body{
     line-height: 2em;
 }
 
-
 #container{
     display:flex;
     justify-content: flex;
 }
+
 li{
     list-style-type: circle;
-
 }
 
 input[type=checkbox]:checked + label.strike-through {
-    text-decoration: line-through;
-    
-    
+    text-decoration: line-through;   
 }
+
 label.strike-through{
     margin: 1em;
 }
+
 span{
     padding:0.3em;  
 }
