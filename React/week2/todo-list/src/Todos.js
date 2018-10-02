@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import CheckBox from "./CheckBox";
 import "./index.css";
 import Todo from "./Todo"
 

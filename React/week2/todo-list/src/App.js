@@ -7,29 +7,22 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            tasks: data,
-            id:13
-            
-            
-        };
+        this.state = { tasks: data, };
         this.handleCheck = this.handleCheck.bind(this);
 
     }
     handleCheck(e) {
-        // const id = Number(e.target.value);;
-        // console.log(id);
-        // const modifiedData = this.state.data.map(task => {
-        //     if (task.id === id) {
-        //         task.done = !task.done;
-        //     }
-        //     return true;
-        // });
+        const id = Number(e.target.value);;
+        console.log(id);
+        const modifiedData = this.state.data.map(task => {
+            if (task.id === id) {
+                task.done = !task.done;
+            }
+            return true;
+        });
 
-        // this.setState(() => { return modifiedData });
-        // // this.setState(modifiedData); 
-        const id = 17;
-        this.setState(() => {return  id });           
+        this.setState(() => { return modifiedData });
+        this.setState(() => { return id });
     };
 
 
@@ -37,7 +30,7 @@ class App extends Component {
         if (this.state.tasks.length) {
             return (
                 <div className="main">
-                    <Todos tasks={this.state.tasks} handleCheck={(e)=> this.handleCheck(e)} />
+                    <Todos tasks={this.state.tasks} handleCheck={(e) => this.handleCheck(e)} />
                 </div>
             )
         }
