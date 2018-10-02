@@ -22,7 +22,6 @@ class App extends Component {
         });
 
         this.setState(() => { return modifiedData });
-        this.setState(() => { return id });
     };
 
 
