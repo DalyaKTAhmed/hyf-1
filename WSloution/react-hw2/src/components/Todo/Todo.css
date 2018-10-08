@@ -1,0 +1,8 @@
+.Todo--debug-border{
+    border: 5px solid blue;
+    height: 2rem;
+}
+
+.Todo--done{
+    text-decoration:line-through;
+}
