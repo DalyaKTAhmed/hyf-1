@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./index.css";
 import Todo from "./Todo"
 
 
@@ -19,26 +18,5 @@ class Todos extends Component {
         )
     }
 };
-
-//     render() {
-//         let tasks = this.props.tasks;
-//         let handleCheck = this.props.handleCheck;
-//         return (
-//             <form>
-//                 {tasks.map((task) =>
-//                     <div className="todo-task">
-//                         <input type="checkbox" onChange={handleCheck} />
-//                         <label className="strike-through" key={task.id}>
-//                             <span>{task.description}</span>
-//                             <span>{task.deadline}</span>
-//                         </label>
-//                     </div>
-//                 )}
-//             </form>
-//         )
-//     }
-// };
-
-
 
 export default Todos;
