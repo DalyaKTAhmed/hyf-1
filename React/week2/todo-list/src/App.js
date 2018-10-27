@@ -12,6 +12,7 @@ class App extends Component {
         this.handleCheck = this.handleCheck.bind(this);
 
     }
+    
     handleCheck(e) {
         const id = Number(e.target.value);;
         console.log(id);
@@ -31,7 +32,6 @@ class App extends Component {
             return (
                 <div className="main">
                     <Todos tasks={this.state.tasks} handleCheck={this.handleCheck} />
-
                 </div>
             )
         }
